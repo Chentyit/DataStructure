@@ -120,6 +120,85 @@ public class ArrayCty {
         data[index] = e;
     }
 
+    /**
+     * 查找数组中是否有元素 e
+     *
+     * @param e
+     * @return
+     */
+    public boolean contains(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 查找数组中元素的索引，找到返回索引，找不到返回 -1
+     *
+     * @param e
+     * @return
+     */
+    public int find(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 删除数组中 index 位置的元素
+     *
+     * @param index
+     * @return
+     */
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Remove failed. Index is illegal");
+        }
+        int ret = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        size--;
+        return ret;
+    }
+
+    /**
+     * 删除数组中的第一个元素
+     *
+     * @return
+     */
+    public int removeFirst() {
+        return remove(0);
+    }
+
+    /**
+     * 删除数组中最后一个元素
+     *
+     * @return
+     */
+    public int removeLast() {
+        return remove(size - 1);
+    }
+
+    /**
+     * 删除数组中的元素 e
+     * @param e
+     */
+    public boolean removeElement(int e) {
+        int index = find(e);
+        if (index != -1) {
+            remove(index);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();

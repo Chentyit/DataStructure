@@ -19,5 +19,14 @@ public class TestMain {
 
         arrayCty.addFirst(-1);
         System.out.println(arrayCty);
+
+        System.out.println(arrayCty.remove(2));
+        System.out.println(arrayCty);
+
+        System.out.println(arrayCty.removeElement(4));
+        System.out.println(arrayCty);
+
+        arrayCty.removeFirst();
+        System.out.println(arrayCty);
     }
 }

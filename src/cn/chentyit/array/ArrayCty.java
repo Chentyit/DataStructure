@@ -5,9 +5,9 @@ package cn.chentyit.array;
  * @Date 2020/3/16 11:53
  * @Description:
  */
-public class ArrayCty {
+public class ArrayCty<T> {
 
-    private int[] data;
+    private T[] data;
     private int size;
 
     /**
@@ -16,7 +16,7 @@ public class ArrayCty {
      * @param capacity
      */
     public ArrayCty(int capacity) {
-        this.data = new int[capacity];
+        this.data = (T[]) new Object[capacity];
         this.size = 0;
     }
 
@@ -59,7 +59,7 @@ public class ArrayCty {
      *
      * @param e
      */
-    public void addLast(int e) {
+    public void addLast(T e) {
         add(size, e);
     }
 
@@ -68,7 +68,7 @@ public class ArrayCty {
      *
      * @param e
      */
-    public void addFirst(int e) {
+    public void addFirst(T e) {
         add(0, e);
     }
 
@@ -78,7 +78,7 @@ public class ArrayCty {
      * @param index
      * @param e
      */
-    public void add(int index, int e) {
+    public void add(int index, T e) {
         if (this.size == data.length) {
             throw new IllegalArgumentException("AddLast failed. Array is full");
         }
@@ -100,7 +100,7 @@ public class ArrayCty {
      * @param index
      * @return
      */
-    public int get(int index) {
+    public T get(int index) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("Get failed. Index is illegal.");
         }
@@ -113,7 +113,7 @@ public class ArrayCty {
      * @param index
      * @param e
      */
-    public void set(int index, int e) {
+    public void set(int index, T e) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("Get failed. Index is illegal.");
         }
@@ -126,9 +126,9 @@ public class ArrayCty {
      * @param e
      * @return
      */
-    public boolean contains(int e) {
+    public boolean contains(T e) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return true;
             }
         }
@@ -141,9 +141,9 @@ public class ArrayCty {
      * @param e
      * @return
      */
-    public int find(int e) {
+    public int find(T e) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return i;
             }
         }
@@ -156,15 +156,17 @@ public class ArrayCty {
      * @param index
      * @return
      */
-    public int remove(int index) {
+    public T remove(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Remove failed. Index is illegal");
         }
-        int ret = data[index];
+        T ret = data[index];
         for (int i = index + 1; i < size; i++) {
             data[i - 1] = data[i];
         }
         size--;
+        // 让 JVM 回收
+        data[size] = null;
         return ret;
     }
 
@@ -173,7 +175,7 @@ public class ArrayCty {
      *
      * @return
      */
-    public int removeFirst() {
+    public T removeFirst() {
         return remove(0);
     }
 
@@ -182,7 +184,7 @@ public class ArrayCty {
      *
      * @return
      */
-    public int removeLast() {
+    public T removeLast() {
         return remove(size - 1);
     }
 
@@ -190,7 +192,7 @@ public class ArrayCty {
      * 删除数组中的元素 e
      * @param e
      */
-    public boolean removeElement(int e) {
+    public boolean removeElement(T e) {
         int index = find(e);
         if (index != -1) {
             remove(index);

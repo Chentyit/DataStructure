@@ -8,7 +8,7 @@ package cn.chentyit.array;
 public class TestMain {
 
     public static void main(String[] args) {
-        ArrayCty arrayCty = new ArrayCty(20);
+        ArrayCty<Integer> arrayCty = new ArrayCty<>(20);
         for (int i = 0; i < 10; i++) {
             arrayCty.addLast(i);
         }

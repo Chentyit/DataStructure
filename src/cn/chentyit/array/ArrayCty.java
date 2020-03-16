@@ -168,7 +168,7 @@ public class ArrayCty<T> {
         // 让 JVM 回收
         data[size] = null;
 
-        if (size == data.length / 4) {
+        if (size == data.length / 4 && data.length / 2 != 0) {
             resize(data.length / 2);
         }
         return ret;

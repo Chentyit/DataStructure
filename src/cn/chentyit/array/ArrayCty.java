@@ -79,12 +79,12 @@ public class ArrayCty<T> {
      * @param e
      */
     public void add(int index, T e) {
-        if (this.size == data.length) {
-            throw new IllegalArgumentException("AddLast failed. Array is full");
-        }
-
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("AddLast failed. Require index >= 0 and index <= size");
+        }
+
+        if (this.size == data.length) {
+            resize(2 * data.length);
         }
 
         for (int i = size - 1; i >= index; i--) {
@@ -167,6 +167,10 @@ public class ArrayCty<T> {
         size--;
         // 让 JVM 回收
         data[size] = null;
+
+        if (size == data.length / 4) {
+            resize(data.length / 2);
+        }
         return ret;
     }
 
@@ -190,6 +194,7 @@ public class ArrayCty<T> {
 
     /**
      * 删除数组中的元素 e
+     *
      * @param e
      */
     public boolean removeElement(T e) {
@@ -214,5 +219,13 @@ public class ArrayCty<T> {
         }
         res.append(']');
         return res.toString();
+    }
+
+    private void resize(int newCapacity) {
+        T[] newData = (T[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
     }
 }

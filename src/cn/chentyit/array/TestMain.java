@@ -8,7 +8,7 @@ package cn.chentyit.array;
 public class TestMain {
 
     public static void main(String[] args) {
-        ArrayCty<Integer> arrayCty = new ArrayCty<>(20);
+        ArrayCty<Integer> arrayCty = new ArrayCty<>();
         for (int i = 0; i < 10; i++) {
             arrayCty.addLast(i);
         }
@@ -18,15 +18,6 @@ public class TestMain {
         System.out.println(arrayCty);
 
         arrayCty.addFirst(-1);
-        System.out.println(arrayCty);
-
-        System.out.println(arrayCty.remove(2));
-        System.out.println(arrayCty);
-
-        System.out.println(arrayCty.removeElement(4));
-        System.out.println(arrayCty);
-
-        arrayCty.removeFirst();
         System.out.println(arrayCty);
     }
 }

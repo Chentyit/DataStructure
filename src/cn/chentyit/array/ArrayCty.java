@@ -93,4 +93,45 @@ public class ArrayCty {
         data[index] = e;
         size++;
     }
+
+    /**
+     * 获取 index 位置的元素
+     *
+     * @param index
+     * @return
+     */
+    public int get(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Get failed. Index is illegal.");
+        }
+        return data[index];
+    }
+
+    /**
+     * 修改 index 位置的元素
+     *
+     * @param index
+     * @param e
+     */
+    public void set(int index, int e) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Get failed. Index is illegal.");
+        }
+        data[index] = e;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        res.append(String.format("Array: size = %d, capacity = %d\n", size, data.length));
+        res.append('[');
+        for (int i = 0; i < size; i++) {
+            res.append(data[i]);
+            if (i != size - 1) {
+                res.append(", ");
+            }
+        }
+        res.append(']');
+        return res.toString();
+    }
 }

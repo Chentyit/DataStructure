@@ -228,4 +228,12 @@ public class ArrayCty<T> {
         }
         data = newData;
     }
+
+    public T getLast() {
+        return get(size - 1);
+    }
+
+    public T getFirst() {
+        return get(0);
+    }
 }

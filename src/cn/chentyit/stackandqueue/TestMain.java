@@ -8,13 +8,15 @@ package cn.chentyit.stackandqueue;
 public class TestMain {
 
     public static void main(String[] args) {
-        ArrayStack<Integer> stack = new ArrayStack<>();
-        for (int i = 0; i < 5; i++) {
-            stack.push(i);
-            System.out.println(stack);
-        }
+        ArrayQueue<Integer> queue = new ArrayQueue<>();
+        for (int i = 0; i < 10; i++) {
+            queue.enqueue(i);
+            System.out.println(queue);
 
-        stack.pop();
-        System.out.println(stack);
+            if (i % 3 == 2) {
+                queue.dequeue();
+                System.out.println(queue);
+            }
+        }
     }
 }

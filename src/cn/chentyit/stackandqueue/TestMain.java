@@ -8,7 +8,7 @@ package cn.chentyit.stackandqueue;
 public class TestMain {
 
     public static void main(String[] args) {
-        ArrayQueue<Integer> queue = new ArrayQueue<>();
+        LoopQueue<Integer> queue = new LoopQueue<>();
         for (int i = 0; i < 10; i++) {
             queue.enqueue(i);
             System.out.println(queue);

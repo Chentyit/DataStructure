@@ -1,5 +1,7 @@
 package cn.chentyit.linklist;
 
+import cn.chentyit.stackandqueue.LoopQueue;
+
 /**
  * @Author Chentyit
  * @Date 2020/3/18 12:22
@@ -8,13 +10,15 @@ package cn.chentyit.linklist;
 public class TestMain {
 
     public static void main(String[] args) {
-        LinkedListStack<Integer> stack = new LinkedListStack<>();
-        for (int i = 0; i < 5; i++) {
-            stack.push(i);
-            System.out.println(stack);
-        }
+        LinkedListQueue<Integer> queue = new LinkedListQueue<>();
+        for (int i = 0; i < 10; i++) {
+            queue.enqueue(i);
+            System.out.println(queue);
 
-        System.out.println(stack.pop());
-        System.out.println(stack);
+            if (i % 3 == 2) {
+                queue.dequeue();
+                System.out.println(queue);
+            }
+        }
     }
 }

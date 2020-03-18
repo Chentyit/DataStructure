@@ -95,4 +95,110 @@ public class LinkedList<T> {
     public void addLast(T t) {
         add(size, t);
     }
+
+    /**
+     * 获取链表某个索引上的节点
+     *
+     * @param index
+     * @return
+     */
+    public T get(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Get failed. Illegal index.");
+        }
+        Node cur = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return cur.t;
+    }
+
+    /**
+     * 获得链表的第一个元素
+     *
+     * @return
+     */
+    public T getFirst() {
+        return get(0);
+    }
+
+    /**
+     * 获取链表最后一个节点
+     *
+     * @return
+     */
+    public T getLast() {
+        return get(size - 1);
+    }
+
+    /**
+     * 修改链表中索引为 index 位置的元素
+     * @param index
+     * @param t
+     */
+    public void set(int index, T t) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Set failed. Illegal index");
+        }
+        Node cur = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        cur.t = t;
+    }
+
+    /**
+     * 查找链表中是否有元素 t
+     * @param t
+     * @return
+     */
+    public boolean contains(T t) {
+        Node cur = dummyHead.next;
+        while (cur != null) {
+            if (cur.t.equals(t)) {
+                return true;
+            }
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    /**
+     * 删除某个位置 index 上的元素
+     * @param index
+     * @return
+     */
+    public T remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Remove failed. Index is illegal");
+        }
+
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
+
+        Node retNode = prev.next;
+        prev.next = retNode.next;
+        retNode.next = null;
+        return retNode.t;
+    }
+
+    public T removeFirst() {
+        return remove(0);
+    }
+
+    public T removeLast() {
+        return remove(size - 1);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        for (Node cur = dummyHead.next; cur != null; cur = cur.next) {
+            res.append(cur).append("->");
+        }
+        res.append("NULL");
+        return res.toString();
+    }
 }

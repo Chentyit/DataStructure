@@ -30,11 +30,11 @@ public class LinkedList<T> {
         }
     }
 
-    private Node head;
+    private Node dummyHead;
     private int size;
 
     public LinkedList() {
-        this.head = null;
+        this.dummyHead = new Node();
         this.size = 0;
     }
 
@@ -57,20 +57,6 @@ public class LinkedList<T> {
     }
 
     /**
-     * 链表头插元素
-     *
-     * @param t
-     */
-    public void addFirst(T t) {
-//        Node node = new Node(t);
-//        node.next = head;
-//        head = node;
-
-        head = new Node(t, head);
-        size++;
-    }
-
-    /**
      * 在链表指定的索引后添加元素
      *
      * @param index
@@ -81,19 +67,24 @@ public class LinkedList<T> {
             throw new IllegalArgumentException("Add failed. Illegal index.");
         }
 
-        if (index == 0) {
-            addFirst(t);
-        } else {
-            Node prev = head;
-            for (int i = 0; i < index - 1; i++) {
-                prev = prev.next;
-            }
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
 //            Node node = new Node(t);
 //            node.next = prev.next;
 //            prev.next = node;
-            prev.next = new Node(t, prev.next);
-            size++;
-        }
+        prev.next = new Node(t, prev.next);
+        size++;
+    }
+
+    /**
+     * 链表头插元素
+     *
+     * @param t
+     */
+    public void addFirst(T t) {
+        add(0, t);
     }
 
     /**

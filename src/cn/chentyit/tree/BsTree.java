@@ -1,5 +1,10 @@
 package cn.chentyit.tree;
 
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 /**
  * @Author Chentyit
  * @Date 2020/3/23 10:53
@@ -116,6 +121,25 @@ public class BsTree<T extends Comparable<T>> {
     }
 
     /**
+     * 二分搜索树非递归前序遍历
+     */
+    public void preOrderNR() {
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node cur = stack.pop();
+            System.out.println(cur.t);
+
+            if (cur.right != null) {
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
+    }
+
+    /**
      * 二分搜索树的中序遍历
      */
     public void inOrder() {
@@ -147,6 +171,26 @@ public class BsTree<T extends Comparable<T>> {
         postOrder(node.left);
         postOrder(node.right);
         System.out.println(node.t);
+    }
+
+    /**
+     * 二分搜索树的层序遍历
+     */
+    public void levelOrder() {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();
+            System.out.println(cur.t);
+
+            if (cur.left != null) {
+                queue.add(cur.left);
+            }
+            if (cur.right != null) {
+                queue.add(cur.right);
+            }
+        }
     }
 
     @Override

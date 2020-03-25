@@ -4,6 +4,7 @@ package cn.chentyit.tree;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 /**
  * @Author Chentyit
@@ -309,6 +310,61 @@ public class BsTree<T extends Comparable<T>> {
 
         node.right = removeMax(node.right);
         return node;
+    }
+
+    /**
+     * 从二分搜索树中删除元素为 t 的节点
+     * @param t
+     */
+    public void remove(T t) {
+        root = remove(root, t);
+    }
+
+    /**
+     * 删除掉以 node 为根的二分搜索树中值为 t 的节点，递归方法
+     * 返回删除节点后新的二分搜索树的根
+     * @param node
+     * @param t
+     * @return
+     */
+    private Node remove(Node node, T t) {
+        if (node ==null) {
+            return null;
+        }
+
+        if (t.compareTo(node.t) < 0) {
+            node.left = remove(node.left, t);
+            return node;
+        } else if (t.compareTo(node.t) > 0) {
+            node.right = remove(node.right, t);
+            return node;
+        } else {
+            // 待删除左子树为空
+            if (node.left == null) {
+                Node rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+
+            // 待删除右子树为空
+            if (node.right == null) {
+                Node leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+
+            // 待删除节点左右字数均不为空
+            // 找到比待删除节点大的最小节点，即右子树最小节点
+            // 用这个节点替换待删除节点
+            Node successor = minimum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+            node.left = node.right = null;
+
+            return successor;
+        }
     }
 
     @Override
